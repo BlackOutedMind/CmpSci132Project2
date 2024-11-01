@@ -20,7 +20,7 @@ from collections import defaultdict
 
 # Creates variable for file.
 voting_counites='Voting-Counties.csv' 
-
+voting_counties = 'VotingCountiesFixed.csv'
 
 #Initializes a variable to hold the total votes.
 state_totals = defaultdict(lambda: {'RR': 0, 'BB': 0})
@@ -68,6 +68,3 @@ elif total_BB > total_RR:
     overall_votes = total_BB
 
 print(f"Winner of the popluar vote: {overall_winner} with {overall_votes} votes.", "-", f"%{percent_total:.3}") #Prints results for overall winner
-
-
-     
