@@ -3,11 +3,12 @@ Computer Science project 2
 Voting system
 
 
-##Project Tasks
-• Task 1: Collect Votes cast from counties in the County_Votes.csv and determine the sum of votes for candidate in each state.  
-• Task 2: Convert the votes to % win for Buggs Bunny (BB) and for Road Runner (RR) in each
+## Project Tasks
+
+• ✅(Paige's File) Task 1: Collect Votes cast from counties in the County_Votes.csv and determine the sum of votes for candidate in each state.  
+• ✅(Paige's File) Task 2: Convert the votes to % win for Buggs Bunny (BB) and for Road Runner (RR) in each
 state.  
-• Task 3: Determine who won the popular vote (ie. who had the most votes across the entire United States).  
+• ✅(Paige's File) Task 3: Determine who won the popular vote (ie. who had the most votes across the entire United States).  
 • Task 4: Read in the information for each state, including the number of Electoral Votes from the file State-Info.csv.  
 • Task 5: Award Electoral Votes for each state to the winner of the state with the highest number of votes BB or RR.  
 • Task 6: Determine who won the Electoral Vote tally  
@@ -19,3 +20,7 @@ state.
 Bunny (green) or Road Runner (magenta) was the winner. (Hitn: Use the latitude and
 longitude for this)  
 • Extra Credit Task 3 [+10 points]: Plot the state’s county results for the State ID entered as part  
+
+## Changes made
+- Updated Readme
+- Separeted Main.py into countiesFunction.py and popularVote.py
