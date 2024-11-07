@@ -63,7 +63,7 @@ while lineList[county] != "END":
         BB_Votes = int(lineList[BB_Votes])
         Return_Date = str(lineList[Return_Date])
         Return_Time = str(lineList[Return_Time])
-        CountiesDict[pos] = [lineList[county], lineList[county_full], lineList[county_fips], lineList[state_id], lineList[state_name], lineList[Return_Time], lineList[lat], lineList[lng], lineList[population], lineList[percentage_State_Population], lineList[factor], lineList[VoteCast], lineList[Votes], lineList[RR_Votes], lineList[BB_Votes], lineList[Return_Date], lineList[Return_Time], lineList[LastVar]] 
+        CountiesDict[pos] = [lineList[county], lineList[county_full], lineList[county_fips], lineList[state_id], lineList[state_name], lineList[Return_Time], lineList[lat], lineList[lng], lineList[population], lineList[percentage_State_Population], lineList[factor], lineList[VoteCast], lineList[Votes], lineList[RR_Votes], lineList[BB_Votes], lineList[Return_Date], lineList[Return_Time], lineList[LastVar]]
         pos += 1
     else:
         pos = 0

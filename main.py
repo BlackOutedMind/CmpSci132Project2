@@ -7,13 +7,13 @@
 #
 #
 # Created on: Oct/25/2024 
-# By: Paige E. McCullough, Sabrina and Yuri W. Dourado
+# By: Paige E. McCullough, Sabrina Abdukadirova and Yuri W. Dourado
 #  Edited on: Nov/01/2024
-#  By: Yuri W. Dourado
-# Change log:
+# # Change log:
 #  - Import popularVote.py
 #  - Started function countPopularVote to complete task 1, 2 and 3.
-#
+# Edited Nov/05/2024
+# # Change log: 
 #
 
 import matplotlib
