@@ -21,6 +21,10 @@ Bunny (green) or Road Runner (magenta) was the winner. (Hitn: Use the latitude a
 longitude for this)  
 • Extra Credit Task 3 [+10 points]: Plot the state’s county results for the State ID entered as part  
 
-## Changes made
+## Changes made - Nov/01/2024
 - Updated Readme
 - Separeted Main.py into countiesFunction.py and popularVote.py
+## Changes made - Nov/05/2024
+- New file `ExtraFunctions.py` -> Has different functions for the code so they are re-usable, and better organization
+- New File `Voting_project02.py` -> Burner code, testing ground for avoiding breaking the main program
+- Obsolete: `main.py`, `countiesFunction.py`, `popularVote.py`
