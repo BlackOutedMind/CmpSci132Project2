@@ -99,16 +99,16 @@ def fileReader():
 
 
             # Add information to the dictionaries
-            countyDictionary[county] = [county_FullName, 
-                                        stateID, 
-                                        votes_RR, 
-                                        votes_BB, 
-                                        dateAndTime, 
-                                        county_votes, 
-                                        dateAndTime, 
-                                        county_latitute, 
-                                        county_longitude, 
-                                        county_population]
+            countyDictionary[county] = {'County Fullname':county_FullName, 
+                                        'StateID':stateID, 
+                                        'RR':votes_RR, 
+                                        'BB':votes_BB, 
+                                        'Date and Time': dateAndTime, 
+                                        'County Votes': county_votes, 
+                                        'Latitude': county_latitute, 
+                                        'Longitude': county_longitude, 
+                                        'Population': county_population
+                                        }
 
             # Add the state to the state dictionary
             if stateID not in stateDictionary:
@@ -234,11 +234,17 @@ askForTime()
 
 # Extra Credit 3 depending on Task 7
 def SeparateCountyState(stateIn):
+    global tempDict 
     tempDict = {}
     for key, value in countyDictionary.items(): # Checks if the county is in the state, and copies the values to the tempDict
-        if value[1] == stateIn:
-            tempDict[key] = [value[0], value[1], value[2], value[3], value[4], value[5], value[6], value[7], value[8], value[9]]
-
+        if countyDictionary[key]['StateID'] == stateIn:
+            tempDict[key] = {'RR': value['RR'], 
+                             'BB': value['BB'], 
+                             'County Name': value['County Fullname'],
+                             'votes': value['County Votes'],
+                             'Latitude': value['Latitude'],
+                             'Longitude': value['Longitude']
+                             }
 
 
 
@@ -254,6 +260,7 @@ def call_a_state():
 
 call_a_state()
 ef.plot_map(countyDictionary)
+# print(tempDict)
 ef.plot_map(tempDict)
 
 # Prints final info (DEBUG)

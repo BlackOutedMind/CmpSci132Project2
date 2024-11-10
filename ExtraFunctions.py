@@ -97,9 +97,9 @@ def plot_map(dictIn):
 
     # From countyDictionary, pull latitudes and longitudes and plot them on the map
     for key, value in dictIn.items():
-        if value[2] > value[3]:
+        if dictIn[key]['RR'] > dictIn[key]['BB']:
             color = 'Green'
         else:
             color = 'Magenta'
-        ax.plot(float(value[8]), float(value[7]), 'o', color=color, markersize=3)
+        ax.plot(float(dictIn[key]['Longitude']), float(dictIn[key]['Latitude']), 'o', color=color, markersize=3)
     plt.show()
