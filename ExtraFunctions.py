@@ -6,35 +6,10 @@
 # 
 
 from datetime import *
-
-
-
-
-########################################################
-# necessary Variables
-
-electoralVotesDicts = {
-    'AL': 9, 'AK': 3, 'AZ': 11, 'AR': 6, 'CA': 54,
-    'CO': 10, 'CT': 7, 'DE': 3, 'DC': 3, 'FL': 30, 'GA': 16,
-    'HI': 4, 'ID': 4, 'IL': 19, 'IN': 11, 'IA': 6,
-    'KS': 6, 'KY': 8, 'LA': 8, 'ME': 4, 'MD': 10,
-    'MA': 11, 'MI': 15, 'MN': 10, 'MS': 6,
-    'MO': 10, 'MT': 4, 'NE': 5, 'NV': 6, 'NH': 4,
-    'NJ': 14, 'NM': 5, 'NY': 28, 'NC': 16,
-    'ND': 3, 'OH': 17, 'OK': 7, 'OR': 8, 'PA': 19,
-    'RI': 4, 'SC': 9, 'SD': 3, 'TN': 11,
-    'TX': 40, 'UT': 6, 'VT': 3, 'VA': 13, 'WA': 12,
-    'WV': 4, 'WI': 10, 'WY': 3
-}
-
-
-
+import matplotlib.pyplot as plt
 
 #######################################################################
 # Functions
-
-
-
 
 
 def convertTime(time):
@@ -47,13 +22,17 @@ def addTimeAndDate(date,time):
     dateTimeVar = datetime.strptime(combined, "%m/%d/%Y %H:%M:%S")
     return dateTimeVar
 
-def sortTimeAndDate(dictIn):
-    return {key: val for key, val in sorted(dictIn.items(), key = lambda ele: ele[1][2])}
+def sortDictByTime(dictIn):
+    return dict(sorted(dictIn.items(), key=lambda item: item[1]['State Last Vote']))
+
+def sortDictByAlphabet(dictIn):
+    return dict(sorted(dictIn.items(), key=lambda item: item[0]))
 
 
 def popularVotesWinner(varIn):
     BB = 0
     RR = 0
+    sumVotes = 0
     for state, totals in varIn.items():
         BB += totals['BB']
         RR += totals['RR']
@@ -64,24 +43,63 @@ def popularVotesWinner(varIn):
     RR_percent = "{:.2f}%".format(100 *  RR/ sumVotes)
     BB_percent = "{:.2f}%".format(100 * BB/ sumVotes)
     if RR_percent > BB_percent:
-        return 'RR'
+        return 'Road Runner'
     else:
-        return 'BB'
+        return 'Bugs Bunny'
 
-electoralVotesDicts = {}
+def winnerPerState(varIn):
+    RR = 0
+    BB = 0
+    for state, votes in varIn.items():
+        if votes['RR'] > votes['BB']:
+            # print(f'{state} winner is Road Runner')
+            varIn[state]['Pop Vote Winner'] = 'Road Runner'
+            RR += 1
+        else:
+            # print(f'{state} winner is Bugs Bunny')
+            varIn[state]['Pop Vote Winner'] = 'Bugs Bunny'
+            BB += 1
+    if RR > BB:
+        return 'Road Runner'
+    else:
+        return 'Bugs Bunny'
+
+
+# electoralVotesDicts = {}
 def electoralVotesWinner(varIn):
     RR = 0
     BB = 0
     for state, votes in varIn.items():
         # print(state)
         # print(votes)
-        if popularVotesWinner(varIn) == 'RR':
-            electoralVotesDicts[state] = 'RR'
+        if varIn[state]['RR'] > varIn[state]['BB']:
+            # electoralVotesDicts[state] = 'RR'
+            varIn[state]['Electoral Votes Winner RR'] = varIn[state]['Electoral Votes Awards']
             RR += votes['RR']
         else:
-            electoralVotesDicts[state] = 'BB'
+            varIn[state]['Electoral Votes Winner BB'] = varIn[state]['Electoral Votes Awards']
+
             BB += votes['BB']
+
     if RR > BB:
-        return 'RR'
+        return 'Road Runner'
     else:
-        return 'BB'
+        return 'Bugs Bunny'
+
+def plot_map(dictIn):
+    # Plot the map of the USA
+    fig, ax = plt.subplots()
+    # img = plt.imread("USA-Map.jpg")
+    ax.set_aspect('equal')
+    ax.set_axis_off()
+    ax.set_title('USA Counties Winner of Popular Vote')
+    # ax.imshow(img, extent=[-180, -65, 20, 75])
+
+    # From countyDictionary, pull latitudes and longitudes and plot them on the map
+    for key, value in dictIn.items():
+        if value[2] > value[3]:
+            color = 'Green'
+        else:
+            color = 'Magenta'
+        ax.plot(float(value[8]), float(value[7]), 'o', color=color, markersize=3)
+    plt.show()

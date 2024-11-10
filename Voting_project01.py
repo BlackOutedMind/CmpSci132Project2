@@ -165,10 +165,13 @@ def askForTime():
     sortedMasterDict = ef.sortTimeAndDate(masterDict)
     for key, val in sortedMasterDict.items():
         if val[2] <= newDate:
-            # determineWinner()
             temp_state_winner[val[0]]['RR'] += val[3]
             temp_state_winner[val[0]]['BB'] += val[4]
-
+            if val[3] > val[4]:
+                print(f"At {val[2]} Road Runner is winning in {val[0]}")
+            else:
+                print(f"At {val[2]} Bugs Bunny is winning in {val[0]}")
+    print(temp_state_winner)
     
             # print(f"County: {key} State: {val[0]} Time: {val[2]} Votes RR: {val[3]} Votes BB: {val[4]}")
     # determineWinner(temp_state_winner)
