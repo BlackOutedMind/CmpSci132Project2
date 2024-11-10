@@ -30,7 +30,8 @@ longitude for this)
 - Obsolete: `main.py`, `countiesFunction.py`, `popularVote.py`
 ## Changes made - Nov/09/2024
 - Code being completly rewritten, from the ground up.
-
+## Changes made - Nov/10/2024
+- So much and it's 2:20 A.M., would do it prettier but I really just wanna go to bed for the sake of going to bed
 
 ### quick copy paste
 20:30:00
