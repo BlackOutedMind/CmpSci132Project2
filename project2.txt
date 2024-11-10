@@ -1,11 +1,48 @@
-Please enter the state abbreviation: 
+Please enter a time in the format HH:MM:SS: Please enter a date in the format MM/DD/YYYY: At 2024-11-05 20:30:00; Florida's winner is Road Runner
+At 2024-11-05 20:30:00; North Dakota's winner is Road Runner
+At 2024-11-05 20:30:00; New Jersey's winner is Bugs Bunny
+At 2024-11-05 20:30:00; Virginia's winner is Road Runner
+At 2024-11-05 20:30:00; Missouri's winner is Road Runner
+At 2024-11-05 20:30:00; Iowa's winner is Road Runner
+At 2024-11-05 20:30:00; Texas's winner is Road Runner
+At 2024-11-05 20:30:00; Mississippi's winner is Bugs Bunny
+At 2024-11-05 20:30:00; Kentucky's winner is Road Runner
+At 2024-11-05 20:30:00; Ohio's winner is Road Runner
+At 2024-11-05 20:30:00; Alaska's winner is Road Runner
+At 2024-11-05 20:30:00; Tennessee's winner is Road Runner
+At 2024-11-05 20:30:00; Minnesota's winner is Road Runner
+At 2024-11-05 20:30:00; South Carolina's winner is Road Runner
+At 2024-11-05 20:30:00; Georgia's winner is Bugs Bunny
+At 2024-11-05 20:30:00; Arkansas's winner is Road Runner
+At 2024-11-05 20:30:00; Montana's winner is Bugs Bunny
+At 2024-11-05 20:30:00; Colorado's winner is Road Runner
+At 2024-11-05 20:30:00; Louisiana's winner is Bugs Bunny
+At 2024-11-05 20:30:00; Idaho's winner is Road Runner
+At 2024-11-05 20:30:00; Washington's winner is Bugs Bunny
+At 2024-11-05 20:30:00; New York's winner is Bugs Bunny
+At 2024-11-05 20:30:00; Massachusetts's winner is Road Runner
+At 2024-11-05 20:30:00; Oregon's winner is Road Runner
+At 2024-11-05 20:30:00; Kansas's winner is Road Runner
+At 2024-11-05 20:30:00; South Dakota's winner is Road Runner
+At 2024-11-05 20:30:00; California's winner is Bugs Bunny
+At 2024-11-05 20:30:00; Illinois's winner is Bugs Bunny
+At 2024-11-05 20:30:00; Pennsylvania's winner is Bugs Bunny
+At 2024-11-05 20:30:00; North Carolina's winner is Road Runner
+At 2024-11-05 20:30:00; Oklahoma's winner is Road Runner
+At 2024-11-05 20:30:00; New Mexico's winner is Road Runner
+At 2024-11-05 20:30:00; Alabama's winner is Bugs Bunny
+At 2024-11-05 20:30:00; Nebraska's winner is Bugs Bunny
+At 2024-11-05 20:30:00; Wisconsin's winner is Bugs Bunny
+At 2024-11-05 20:30:00; Indiana's winner is Road Runner
+At 2024-11-05 20:30:00; Michigan's winner is Bugs Bunny
+72.55% of states have reported
+The popular vote winner is Road Runner
+The electoral vote winner is Bugs Bunny
+Please enter a state ID: 
     State Name: Pennsylvania
     State Winner: Bugs Bunny
     Total Votes: 4217716
-
     
-The winner of the popular vote is Road Runner
-The winner of the electoral vote is Road Runner
                                                       Values                                                                               Percent of State Votes                           Electoral Votes
                                                   ---------------                                                                        -------------------------                      ---------------------
 state Name           | State ID |       Sum of Votes |     Sum of RR Values |    Sum of BB Values |       Count of county |       RR Percent |           BB Percent |          Road Runner |       Buggs Bunny
@@ -60,3 +97,4 @@ Washington           |     WA |              2423437 |              1154087 |   
 Wisconsin            |     WI |              1947726 |               936535 |             1011191 |                    72 |           48.08% |               51.92% |                    0 |                   10 |
 West Virginia        |     WV |               593696 |               286411 |              307285 |                    55 |           48.24% |               51.76% |                    0 |                    4 |
 Wyoming              |     WY |               132302 |                70448 |               61854 |                    23 |           53.25% |               46.75% |                    3 |                    0 |
+Grand Total:              All |             85864599 |              43177112 |             42687487            3144 |                 0 |                    3               46.75%               53.25%

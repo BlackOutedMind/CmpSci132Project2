@@ -49,11 +49,20 @@ totalPopVotes = 0
 voting_counites = 'VotingCountiesFixed.csv'
 
 
+total_RR = 0
+total_BB = 0
+
+electoral_RR = 0
+electoral_BB = 0
+totalCounties = 0
 
 # Read the file and adress them to the right dictionary
 def fileReader():
-    global totalPopVotes
+
+    global totalPopVotes, total_RR, total_BB, totalCounties, electoral_RR, electoral_BB
     countyquantity = 1
+
+
     with open(voting_counites, 'r') as data:
 
         #
@@ -75,6 +84,9 @@ def fileReader():
             county_population = line[8]
             county_votes = line[12]
 
+            # Count the total number of counties
+            totalCounties += 1
+
             # Separate state information
             stateID = line[3]
             state_Name = line[4]
@@ -86,9 +98,9 @@ def fileReader():
 
             totalPopVotes += county_votes
 
-
-            # print(totalPopVotes)
-            
+            # Count the total votes for each candidate
+            total_RR += votes_RR
+            total_BB += votes_BB
 
 
             # Merge date and time into one variable
@@ -123,6 +135,7 @@ def fileReader():
                                             'Electoral Votes Winner BB': 0,
                                             'Electoral Votes Winner RR': 0
                                             }
+                # Adds to state last county to upload votes (This function is kinda useless, but it's here for safety measures)
                 if dateAndTime > stateDictionary[stateID]['State Last Vote']:
                     stateDictionary[stateID]['State Last Vote'] = dateAndTime
             
@@ -133,28 +146,6 @@ def fileReader():
                 stateDictionary[stateID]['Total'] += county_votes
                 stateDictionary[stateID]['County Quantity'] += countyquantity
 
-
-
-#Call the function to read the file
-
-fileReader()
-
-
-# print(stateDictionary)
-
-
-# Determine the winner of the popular vote  
-winner = ef.popularVotesWinner(stateDictionary)
-
-# Determine the winner of the electoral vote tally
-winner = ef.electoralVotesWinner(stateDictionary)
-
-# Determine the winner of each state
-ef.winnerPerState(stateDictionary)
-
-# Sort the dictionaries by time for Task 8
-sortedStateDictionary = ef.sortDictByTime(stateDictionary)
-sortedCountyDictionary = ef.sortDictByTime(sortedStateDictionary)
 
 # create a dictionary with the states that all the counties have been uploaded by the time requested
 tempDict = {}
@@ -184,10 +175,7 @@ def askForTime():
                                 'Pop Vote Winner': value['Pop Vote Winner'], 
                                 'State Name': value['State Name']
                                 }
-                                # 'Electoral Votes Awards': electoral_Votes[key],
-                                # 'Electoral Votes Winner BB': 0,
-                                # 'Electoral Votes Winner RR': 0
-                                # }
+
 
             else: # Update the values if the state is repeated in the loop, and count the ammount of coutines in a state
                 tempDict[key]['RR'] += value['RR']
@@ -213,6 +201,8 @@ def askForTime():
     # Determine the overall winner in the time given, and determining the winner of the popular and electoral votes then print
     percentReported = (totalStates/len(stateDictionary)) * 100
     print("{:.2f}% of states have reported".format(percentReported))
+
+    # Prints information on winner in both types of pools
     if tempPopularWinner > totalStates/2:
         print("The popular vote winner is Road Runner")
         if tempElectoralWinner > totalStates/2:
@@ -228,16 +218,16 @@ def askForTime():
             print("The electoral vote winner is Bugs Bunny")
 
 
-askForTime()
-
-# Frees Temp Dict and re-uses for Extra Credit 3
-
 # Extra Credit 3 depending on Task 7
 def SeparateCountyState(stateIn):
+    # Resets the temporary dictionary if this function is ran so it doesnt mix states or uses the previosly stored values
     global tempDict 
     tempDict = {}
-    for key, value in countyDictionary.items(): # Checks if the county is in the state, and copies the values to the tempDict
+
+    # Checks if the county is in the state, and copies the values to the tempDict
+    for key, value in countyDictionary.items(): 
         if countyDictionary[key]['StateID'] == stateIn:
+            # Copy the values to the dictionary
             tempDict[key] = {'RR': value['RR'], 
                              'BB': value['BB'], 
                              'County Name': value['County Fullname'],
@@ -256,21 +246,14 @@ def call_a_state():
     State Winner: {stateDictionary[state]['Pop Vote Winner']}
     Total Votes: {stateDictionary[state]['Total']}
     """)
+    # Calls  the function to separate the counties by state to acomplish individual state plotting
     SeparateCountyState(state)
 
-call_a_state()
-ef.plot_map(countyDictionary)
-# print(tempDict)
-ef.plot_map(tempDict)
-
-# Prints final info (DEBUG)
-# print(f"The winner of the popular vote is {winner}")
-# print(f"The winner of the electoral vote is {winner}")
 
 
 ## PRINT INFO AS A CHART
 
-sortedStateDictionary = ef.sortDictByAlphabet(stateDictionary)
+# sortedStateDictionary = ef.sortDictByAlphabet(stateDictionary)
 
 
 
@@ -281,19 +264,25 @@ def printHeader():
         f" {'Sum of BB Values':>19} |{'Count of county': >22} |{'RR Percent':>17} | {'BB Percent':>20} | {'Road Runner': >20} | {'Buggs Bunny': >17}")
 
 # Final information with sum of everything
-def printGrandTotal(): 
+def printGrandTotal(BB_percent, RR_percent, electoral_RR, electoral_BB): 
     # print(f"{'Grand Total':<20} {'':>8} {totalPopVotes:>20} {total_RR:>20} {total_BB:>22} {totalCounties:>20} {"{:.2f}%".format(percent_total):>23} {"{:.2f}%".format(100-percent_total):>22} {electoral_RR:>20} {electoral_BB:>20}")
-    print(f"Grand Total: {totalPopVotes:>20} ")
+    print(f"Grand Total: {'All':>16} | {totalPopVotes:>20} | {total_RR:>21} | {total_BB:>19} | {totalCounties:>8} | {electoral_BB:>17} | {electoral_RR:>20} {BB_percent:>20} {RR_percent:>20}")
 
 def printStateInfo():  
     printHeader()
+    # BB_percent = 0
+    # RR_percent = 0
+    # electoral_RR = 0
+    # electoral_BB = 0
     for key in sortedStateDictionary:
         BB_percent = "{:.2f}%".format(100 * sortedStateDictionary[key]['BB'] / sortedStateDictionary[key]['Total'])  # Calculates percentages for BB
         RR_percent = "{:.2f}%".format(100 * sortedStateDictionary[key]['RR'] / sortedStateDictionary[key]['Total'])  # Calculates percentages for BB
+        electoral_RR += sortedStateDictionary[key]['Electoral Votes Winner RR']
+        electoral_BB += sortedStateDictionary[key]['Electoral Votes Winner BB']
         print(f"{sortedStateDictionary[key]['State Name']:<20} | {key:>6} | {sortedStateDictionary[key]['Total']:>20} | {sortedStateDictionary[key]['RR']:>20} | {sortedStateDictionary[key]['BB']:>19} | {sortedStateDictionary[key]['County Quantity']:>21} | {RR_percent: >16} | {BB_percent: >20} | {sortedStateDictionary[key]['Electoral Votes Winner RR']: >20} | {sortedStateDictionary[key]['Electoral Votes Winner BB']: >20} |")
-    printGrandTotal()
+    printGrandTotal(BB_percent, RR_percent, electoral_RR, electoral_BB)
 
-printStateInfo()
+# printStateInfo()
 
 
 # Plot the USA map with the counties and the winner of the popular vote
@@ -302,34 +291,35 @@ printStateInfo()
 #References https://stackoverflow.com/questions/34458251/plot-over-an-image-background-in-python
 
 
-def __main__():
-    # Read the file and adress them to the right dictionaries
-    fileReader() # Tasks 1, 2 and 4
+# Read the file and adress them to the right dictionaries
+fileReader() # Tasks 1, 2 and 4
 
-    # Determine the winner of the popular vote
-    winner = ef.popularVotesWinner(stateDictionary) # Task 5
+# Determine the winner of the popular vote
+winner = ef.popularVotesWinner(stateDictionary) # Task 5
 
-    # Determine the winner of the electoral vote tally
-    winner = ef.electoralVotesWinner(stateDictionary) # Task 6
+# Determine the winner of the electoral vote tally
+winner = ef.electoralVotesWinner(stateDictionary) # Task 6
 
-    # Allocate winner of each state to the right dictionary
-    ef.winnerPerState(stateDictionary) 
+# Allocate winner of each state to the right dictionary
+ef.winnerPerState(stateDictionary) 
 
-    # Sort the dictionaries by time for Task 9
-    sortedStateDictionary = ef.sortDictByTime(stateDictionary)
-    sortedCountyDictionary = ef.sortDictByTime(sortedStateDictionary)
+# Sort the dictionaries by time for Task 9
+sortedStateDictionary = ef.sortDictByTime(stateDictionary)
+sortedCountyDictionary = ef.sortDictByTime(sortedStateDictionary)
 
-    # Accept date and time and show the winner at the moment requestes
-    askForTime() # Task 9
+# Accept date and time and show the winner at the moment requestes
+askForTime() # Task 9
 
-    # Task 7, Accept State ID and list all of the summary info for the state with winner, totals and electoral votes awarded
-    call_a_state() 
+# Task 7, Accept State ID and list all of the summary info for the state with winner, totals and electoral votes awarded
+call_a_state() 
 
-    # Task 8, Print a summary
-    printStateInfo() # GrandTotal work in progress
+# Sort the info alphabetically
+sortedStateDictionary = ef.sortDictByAlphabet(stateDictionary)
+# Task 8, Print a summary
+printStateInfo() # GrandTotal work in progress
 
-    # Extra Credit 2
-    plot_map(countyDictionary)
+# Extra Credit 2
+ef.plot_map(countyDictionary)
 
-    # Extra Credit 3 depending on Task 7
-    plot_map(tempDict)
+# Extra Credit 3 depending on Task 7
+ef.plot_map(tempDict)
