@@ -268,12 +268,12 @@ def printGrandTotal(BB_percent, RR_percent, electoral_RR, electoral_BB):
     # print(f"{'Grand Total':<20} {'':>8} {totalPopVotes:>20} {total_RR:>20} {total_BB:>22} {totalCounties:>20} {"{:.2f}%".format(percent_total):>23} {"{:.2f}%".format(100-percent_total):>22} {electoral_RR:>20} {electoral_BB:>20}")
     print(f"Grand Total: {'All':>16} | {totalPopVotes:>20} | {total_RR:>21} | {total_BB:>19} | {totalCounties:>8} | {electoral_BB:>17} | {electoral_RR:>20} {BB_percent:>20} {RR_percent:>20}")
 
-def printStateInfo():  
+def printStateInfo(electoral_RR, electoral_BB, sortedStateDictionary, totalPopVotes, total_RR, total_BB, totalCounties):  
     printHeader()
-    # BB_percent = 0
-    # RR_percent = 0
-    # electoral_RR = 0
-    # electoral_BB = 0
+    BB_percent = 0
+    RR_percent = 0
+    electoral_RR = 0
+    electoral_BB = 0
     for key in sortedStateDictionary:
         BB_percent = "{:.2f}%".format(100 * sortedStateDictionary[key]['BB'] / sortedStateDictionary[key]['Total'])  # Calculates percentages for BB
         RR_percent = "{:.2f}%".format(100 * sortedStateDictionary[key]['RR'] / sortedStateDictionary[key]['Total'])  # Calculates percentages for BB
@@ -316,7 +316,7 @@ call_a_state()
 # Sort the info alphabetically
 sortedStateDictionary = ef.sortDictByAlphabet(stateDictionary)
 # Task 8, Print a summary
-printStateInfo() # GrandTotal work in progress
+printStateInfo(electoral_RR, electoral_BB, sortedStateDictionary, totalPopVotes, total_RR, total_BB, totalCounties) # GrandTotal work in progress
 
 # Extra Credit 2
 ef.plot_map(countyDictionary)
